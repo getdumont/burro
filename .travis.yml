@@ -4,33 +4,15 @@ node_js:
 cache:
   directories:
     - ./node_modules
-    - ./react/node_modules
-stages:
-  - css
-  - react
-jobs:
-  include:
-    - stage: css
-      script: npm run build
-      deploy:
-      - provider: surge
-        domain: opensanca-burro.surge.sh
-        skip_cleanup: true
-        project: ./dist
-        on:
-          tags: true
-    - stage: react
-      script: cd react && npm install && npm run test && npm run lint
-      before_deploy:
-        - npm run build
-      deploy:
-        provider: npm
-        skip_cleanup: true
-        email: guilherme.albino.francisco@gmail.com
-        api_key:
-            secure: bqPdFuzBswBkK6EiBz8hZWqsZVleiW9p+AKolrHC/m5t0zuqHJR1icxSMOzumSBp1q+pI+J5sIkl20RmgqPtRTebvx/rjlYNEKAcO7G5y9qNSMcr1IHv5VQ9p/WI21yFPifMkH0LSpTUpPNU8W7cPu1UUdbJq4BONal2lsxUhiDDTnGH6ZCKv1d64QzYuOLSAafEzS+ZgOTZW9N5+WkekKT4hNBIHHcRZIvWbESe/9GoxBFr2Q0DpgUzLh5+cvEDYBp7+GnmrAabN6R1zZ3jaZf+PJBz3zh8e+OOXzcZVS9pO7j7Eefnozkv1EPxRyibZ5dRL2BLk9vadfuBQQB3KoGxTL4sbnAho+/pcNQxkaCCasMy+lyv/tYoTSB+xau7R3kxf9PeUd/GqbALU/P1uO+fElu2nLcrvHpLC1Rphr9/sLBb+SkCqhi4TltNoRZ2gq3FsbxCnciyeh7QCFeY78qsKHvWComG0YtLK+vo/2SGgLoMqit4YkaefEV3aF5sPS15OndRjRM35UWR3w96Lvy1wbxihsG0nvWnH+BFHoe4O4FqAynw/An38GbAT6lN8ZhckeTiKkixFmhxhnHxpa0dTpVadFYzPrZT2xmDDefy1HMjMM5iC9gUESHKbbvT/vbYAz+334AJvpPOlxSMPfdgaFzZUdn83Bh7iiPCdxc=
-        on:
-          tags: true
+script:
+  - npm run build
+deploy:
+  - provider: surge
+    domain: getdumont.surge.sh
+    skip_cleanup: true
+    project: ./dist
+    on: master
+
 env:
   global:
-    secure: KJErYfj1KX9x474Ux8p1me14FRl9ig3MlyFbvDpDyB94lVK6tp5t1Y1eZG9O0hHzLTiHY6pCQEIXTQNfjmeVQcR76yqxpP3Exm76LHR7/YlxWvWTjxbrzoffRZ2jx7cLDSf3uLnzg8IyoX7XRnHRI0oLQdnsTUEn23szjr4am5/593bvqI/iggqS4zP+3BxS+mRqCOJdi9LBgG8IIrGTT7jXHTznT/JxfoTnVaPqr4Xi9waHL+yOKMcg98fjQdzZRBw0dWGW+kfB+HlHXXPF7p+pCgdNejm1vnpCZwS8eIuD2YMBTvphdebcnpI+Lei4XmkcLH0XSgydvT9lEf5ZYQ4NW2GuV5mdd1PiwsgI5WPyHvzJ1jObRFOQieGbfMYdfQqoL4VWoFeS3dGJyMPZPD4dX0hedWqA26ZzlmHn57I5zVcDbwX7+8o5nKkMUVrYGzOEhPsgSJjhqet+K7S9RnFOMekb6dhunh88LgkjpYfI7YlHTMswkZ+DR4I22JW8NUgXUExVTwflIUNINdTWM2B1XApibMlcXsDy24EQla/g2s3EftfKlPctAemRUmskrgg6zYo7tor15wQ6wYCKX+vovgupLDtkYgIQhTw/LnM7vYmbGaZsAUTWh8paenV5pJFRD/XwWC64SQUgT2DTSLUrLqNL1bBryuT9pb29OUw=
+    secure: RiOaWhSrcQaeMmtAUrjsiWBGhrYFT7SMw93kC0ofoonsR3f7trw1g99PKyebdRUU7T9Te4nictZOY4W5mgk1CF6I1y8Ojiqb3lbEqhfJ5HGvJT9o9MWtQ1q1tqvvtBllA1fpmzaUYp/yyMivR+r45pjHfQT+RswvcclIaEmnJr5O/s80wVnnl1+nJ7P9m55yeylhO192fQgVVoBIFPzVUr5PwKnKxaqAwmOEX7JHlvGzLtvf01qL+0a8Plgs6rPeDxBxgnwL5Ew//MOmv0MTohloQplej4giu0cwqBtANVblXBFWszqCIkkXwxRFUnWTOAJccmNLmypxp4x5BXoUA1+OdU/q0uU4FUicH/HTTG6kfUuzDQDN19a7sa9Hun1Wd9Bn+3TKQp3LJZ/YBL+m9ZpMJuRRC2muisW32k1I+JG+qN2qM7TChkh2U2+sg576KDS4e31mBolzpKSqRMDgku+oHpi/mFtGY40knuL/RizskMjy8RuDPcjAYIdE4tqenstSe5yi0Ja+Vc5Sml1pIX7pJmdrSjd2Q+LEjqr7j8r1jOxR9Ik8cDeRtmQjkGITTiAFMLbjOB7Jt6YhgaJZWDNTJ2PePN3vtgC3YROdpzX+KdT9NL7pWj2Qh/3yZDwEswKLBzgBjhnSmHnQRIcwe1zR/SxvZvhCVlkI4gDorrw=

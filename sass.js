@@ -6,7 +6,7 @@ const postcss = require('postcss');
 const prefixer = require('autoprefixer');
 const nano = require('cssnano');
 
-const DIST_DIR = `dist/v-${pkg.version}`;
+const DIST_DIR = `dist`;
 const indexContent = fs.readFileSync('./_sass/index.sass');
 
 if (!fs.existsSync('dist')){
